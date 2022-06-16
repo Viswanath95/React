@@ -1,0 +1,68 @@
+.Dashboard {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.Navbar {
+    background-color:  #004F7A;
+    width: 100%;
+    height: 30px;
+    display: flex;
+}
+
+.Navbar .leftSide {
+    flex: 50%;
+    display: flex;
+    justify-content: left;
+}
+
+.Navbar .leftSide .menu-bars button{
+    margin-top: 0.2rem;
+    border: 2px solid white;
+    color: white;
+    margin-left: 2rem;
+    font-size: 1rem;
+    background: none;
+    cursor: pointer;
+}
+
+.Navbar .leftSide .icon {
+    max-height: 10px;
+}
+
+.Navbar .leftSide .icon img {
+    max-height: 30px;
+    margin-left: 20px;
+}
+
+.Navbar .rightSide {
+    flex: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Navbar .rightSide .bell-icon button{
+    margin-top: 0.2rem;
+    color: white;
+    margin-right: 2rem;
+    font-size: 1rem;
+    background: none;
+    cursor: pointer;
+}
+
+.Navbar .rightSide button {
+    cursor: pointer;
+}
+
+.Navbar .rightSide img {
+    padding-right: 30px;
+}
+
+
+

@@ -1,0 +1,89 @@
+.nav-menu {
+    background-color: white;
+    border-right: 2px solid #004F7A;
+    width: 130px;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 30px;
+    left: -100%;
+    transition: 850ms;
+}
+
+.nav-menu.active {
+    left: 0;
+    transition: 350ms;
+}
+
+.nav-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 0px 8px 16px;
+    list-style: none;
+    height: 20px;
+}
+
+.nav-text a {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /*padding: 0 16x;
+    padding-right: 50px;*/
+    margin-right: 300px;
+    border-radius: 4px;
+}
+
+.nav-text a:hover {
+    background-color: #4DA8DB;
+    width: 100px;
+}
+
+.nav-menu-items {
+    width: 100%;
+}
+
+/*.navbar-toggle {
+    background-color: white;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+span {
+    margin-left: 16px;
+}*/
+
+.profile-menu {
+    background-color: whitesmoke;
+    width: 110px;
+    height: 8vh;
+    display: flex;
+    justify-content: flex-end;
+    font-family: Arial, Helvetica, sans-serif;
+    position: fixed;
+    top: 30px;
+    right: -100%;
+    transition: 850ms;
+}
+
+.profile-menu.active {
+    right: 0;
+    transition: 350ms;
+}
+
+.profile-menu-items {
+    width: 100%;
+    padding-left: 20px;
+}
+
+
+
+
