@@ -1,14 +1,15 @@
 .nav-menu {
     background-color: white;
-    border-right: 2px solid #004F7A;
-    width: 130px;
+    border-right: 2px solid #d2dde4;
+    width: 140px;
     height: 100vh;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     position: fixed;
     top: 30px;
     left: -100%;
     transition: 850ms;
+    z-index: 10;
 }
 
 .nav-menu.active {
@@ -16,55 +17,52 @@
     transition: 350ms;
 }
 
-.nav-text {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 20px;
-}
-
-.nav-text a {
-    text-decoration: none;
-    color: black;
-    font-size: 14px;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    /*padding: 0 16x;
-    padding-right: 50px;*/
-    margin-right: 300px;
-    border-radius: 4px;
-}
-
-.nav-text a:hover {
-    background-color: #4DA8DB;
-    width: 100px;
-}
-
 .nav-menu-items {
     width: 100%;
 }
 
-/*.navbar-toggle {
-    background-color: white;
-    width: 100%;
-    height: 80px;
+.sidebar-link {
     display: flex;
-    justify-content: flex-start;
+    color: black;
+    justify-content: space-between;
     align-items: center;
+    padding: 1rem;
+    list-style: none;
+    height: 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidebar-link:hover {
+    background-color: #4DA8DB;
+    cursor: pointer;
+}
+
+.dropdown-link {
+  background-color: white;
+  height: 30px;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.dropdown-link:hover {
+    background-color: #4DA8DB;
+    cursor: pointer;
+
 }
 
 span {
-    margin-left: 16px;
-}*/
+    margin-left: 8px;
+}
 
 .profile-menu {
-    background-color: whitesmoke;
+    background-color: rgb(201, 201, 195);
     width: 110px;
-    height: 8vh;
+    height: 4vh;
     display: flex;
     justify-content: flex-end;
     font-family: Arial, Helvetica, sans-serif;
@@ -82,6 +80,10 @@ span {
 .profile-menu-items {
     width: 100%;
     padding-left: 20px;
+}
+
+span{
+    margin-right: 4px;
 }
 
 

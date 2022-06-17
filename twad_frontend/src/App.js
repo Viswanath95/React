@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import Home from "./Pages/Home";
@@ -10,27 +11,31 @@ import Team from "./Pages/Team";
 import ErrorPage from "./ErrorPage.js/ErrorPage";
 import './App.css';
 
-function App() {
-  return (
+export const AppRoutes = () => {
+  let routes = useRoutes([
+    {
+      path: "/dashboard", element: <Dashboard />,
+      children: [
+        { path: "home", element: <Home /> },
+        { path: "reports", element: <Reports /> },
+        { path: "products", element: <Products /> },
+        { path: "team", element: <Team /> },
+        { path: "messages", element: <Messages /> },
+        { path: "support", element: <Support /> },
+      ],
+    },
+    { path: "/", element: <Login />},
+    { path: "*", element: <ErrorPage />},
+  ]);
+  return routes;
+};
+
+const App = () => {
+  return(
     <Router>
-      <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-      <Dashboard>
-      <Routes>
-        <Route path="/dashboard/home" element={<Home />} />
-        <Route path="/dashboard/messages" element={<Messages />} />
-        <Route path="/dashboard/products" element={<Products />} />
-        <Route path="/dashboard/reports" element={<Reports />} />
-        <Route path="/dashboard/support" element={<Support/>} />
-        <Route path="/dashboard/team" element={<Team />} />
-        <Route path="*" element={<ErrorPage />} />
-        <Route />
-      </Routes>
-      </Dashboard>
+      <AppRoutes />
     </Router>
   );
-}
+};
 
 export default App;

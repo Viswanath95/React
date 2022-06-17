@@ -22,8 +22,7 @@ body {
 }
 
 .Navbar .leftSide .menu-bars button{
-    margin-top: 0.2rem;
-    border: 2px solid white;
+    margin-top: 0.5rem;
     color: white;
     margin-left: 2rem;
     font-size: 1rem;
@@ -47,13 +46,28 @@ body {
     justify-content: flex-end;
 }
 
+.Navbar .rightSide .search-icon button{
+    margin-top: 0.2rem;
+    color: white;
+    margin-right: 1rem;
+    font-size: 1rem;
+    background: none;
+}
+
 .Navbar .rightSide .bell-icon button{
     margin-top: 0.2rem;
     color: white;
-    margin-right: 2rem;
+    margin-right: 1rem;
     font-size: 1rem;
     background: none;
-    cursor: pointer;
+}
+
+.Navbar .rightSide .profile-icon button{
+    margin-top: 0.2rem;
+    color: white;
+    margin-right: 1.5rem;
+    font-size: 1rem;
+    background: none;
 }
 
 .Navbar .rightSide button {
