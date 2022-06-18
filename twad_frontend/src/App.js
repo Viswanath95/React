@@ -3,6 +3,10 @@ import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import Home from "./Pages/Home";
+import HomeOne from "./Pages/HomeOne";
+import HomeTwo from "./Pages/HomeTwo";
+import HomeThree from "./Pages/HomeThree";
+import HomeFour from "./Pages/HomeFour";
 import Messages from "./Pages/Messages";
 import Products from "./Pages/Products";
 import Reports from "./Pages/Reports";
@@ -16,7 +20,14 @@ export const AppRoutes = () => {
     {
       path: "/dashboard", element: <Dashboard />,
       children: [
-        { path: "home", element: <Home /> },
+        { path: "home", element: <Home />,
+        children: [
+          { path: "homeone", element: <HomeOne /> }, 
+          { path: "hometwo", element: <HomeTwo /> },
+          { path: "homethree", element: <HomeThree /> },
+          { path: "homefour", element: <HomeFour /> },
+        ],
+      },
         { path: "reports", element: <Reports /> },
         { path: "products", element: <Products /> },
         { path: "team", element: <Team /> },

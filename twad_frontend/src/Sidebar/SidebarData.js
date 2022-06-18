@@ -17,25 +17,25 @@ export const SidebarData = [
             {
                 id: 1,
                 title: 'Homeone',
-                pathname: 'home/homeone',
+                path: 'home/homeone',
                 icon: <AiIcons.AiFillHome />
             },
             {
                 id: 2,
                 title: 'Hometwo',
-                pathname: 'home/hometwo',
+                path: 'home/hometwo',
                 icon: <AiIcons.AiFillHome />
             },
             {
                 id: 3,
                 title: 'Homethree',
-                pathname: 'home/homethree',
+                path: 'home/homethree',
                 icon: <AiIcons.AiFillHome />
             },
             {
                 id: 4,
                 title: 'Homefour',
-                pathname: 'home/homefour',
+                path: 'home/homefour',
                 icon: <AiIcons.AiFillHome />
             }
         ]

@@ -4,7 +4,6 @@ import './Login.css';
 import { users } from './Userdetails';
 
 function Login() {
-    console.log(users);
     let navigate = useNavigate();
     const[data, setData] = useState({username: '', password: ''});
     const changeHandler = (e) => {

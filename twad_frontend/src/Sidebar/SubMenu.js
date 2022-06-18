@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function SubMenu({ item }) {
-    //let navigate = useNavigate();
+    let navigate = useNavigate();
     const[subnav, setSubnav] = useState(false);
 
     const showSubnav = () => {
@@ -28,8 +28,12 @@ function SubMenu({ item }) {
             {subnav &&
                 item.subNav.map((item, index) => {
                     return(
-                        <div>
-                        <Link to={item.pathname} key={index} className="dropdown-link">
+                        <div
+                            onClick={ () =>  {
+                            navigate(`dashboard/${item.path}`)
+                        }}
+                        >
+                        <Link to={item.path} key={index} className="dropdown-link">
                             {item.icon}
                             <span>{item.title}</span>
                         </Link>
