@@ -1,0 +1,50 @@
+.table .customer-button {
+    display: flex;
+    justify-content: flex-end;
+}
+ 
+ .table .customer-button button {
+    display: inline-block;
+    margin-bottom: 6rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: #4DA8DB;
+    background-size: 200%;
+    background-position: 0%;
+    color: #E6E6E6;
+    font-weight: 700;
+    cursor: pointer;
+ }
+
+table {
+    width: 80vw;
+    height: 60vh;
+    font-family: 'Roboto';
+    border: 2px solid grey;
+    border-collapse: collapse;
+    padding-top: 30px;
+}
+
+table td, table th {
+    padding: 8px;
+}
+
+.hover:hover {
+    background-color: lightblue;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4DA8DB;
+    color: black;
+}
+
+table tr {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+

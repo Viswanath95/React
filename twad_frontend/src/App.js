@@ -12,7 +12,7 @@ import Products from "./Pages/Products";
 import Reports from "./Pages/Reports";
 import Support from "./Pages/Support";
 import Team from "./Pages/Team";
-import ErrorPage from "./ErrorPage.js/ErrorPage";
+import ErrorPage from "./ErrorPage/ErrorPage";
 import './App.css';
 
 export const AppRoutes = () => {
