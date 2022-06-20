@@ -13,7 +13,11 @@ function SubMenu({ item }) {
         <>
         <div>
             <Link to={item.path} className="sidebar-link" onClick={item.subNav && showSubnav}>
-                <div>
+                <div
+                     onClick={ () =>  {
+                        navigate(`/dashboard/${item.path}`)
+                    }}
+                >
                     {item.icon}
                     <span>{item.title}</span>
                 </div>
@@ -30,7 +34,7 @@ function SubMenu({ item }) {
                     return(
                         <div
                             onClick={ () =>  {
-                            navigate(`dashboard/${item.path}`)
+                            navigate(`${item.path}`)
                         }}
                         >
                         <Link to={item.path} key={index} className="dropdown-link">

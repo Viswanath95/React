@@ -8,4 +8,4 @@ function HomeOne() {
     )
 }
 
-export default HomeOne;
+export default HomeOne; 

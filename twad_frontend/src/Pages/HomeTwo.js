@@ -8,4 +8,4 @@ function HomeTwo() {
     )
 }
 
-export default HomeTwo;
+export default HomeTwo; 

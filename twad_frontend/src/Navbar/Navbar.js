@@ -41,11 +41,7 @@ function Navbar() {
             <ul className='nav-menu-items'>
             {SidebarData.map((item, index) => {
                     return(
-                        <div
-                            onClick={ () =>  {
-                            navigate(`/dashboard/${item.path}`)
-                        }}
-                        >
+                        <div>
                         <SubMenu item={item} key={index} />
                        </div>
                     )
