@@ -1,10 +1,9 @@
 import React from 'react';
-import * as BiIcons from 'react-icons/bi';
 import * as BsIcons from 'react-icons/bs';
 
 const Data = [
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Willard Patterson",
         companyName: "Jahnson & Jahnson",
         phoneNo: "(704) 555-0127",
@@ -14,7 +13,7 @@ const Data = [
         action: <BsIcons.BsThreeDotsVertical />
     },
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Leonard Smith",
         companyName: "Piza Hhut",
         phoneNo: "(907) 555-0101",
@@ -24,7 +23,7 @@ const Data = [
         action: <BsIcons.BsThreeDotsVertical />
     },
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Leah Long",
         companyName: "Matsubbishi",
         phoneNo: "(303) 555-0105",
@@ -34,7 +33,7 @@ const Data = [
         action: <BsIcons.BsThreeDotsVertical />
     },
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Loretta Dunn",
         companyName: "eggBay",
         phoneNo: "(505) 555-0125",
@@ -44,7 +43,7 @@ const Data = [
         action: <BsIcons.BsThreeDotsVertical />
     },
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Ray Holt",
         companyName: "IVM",
         phoneNo: "(480) 555-0103",
@@ -54,7 +53,7 @@ const Data = [
         action: <BsIcons.BsThreeDotsVertical />
     },
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Guy Moore",
         companyName: "Acebook",
         phoneNo: "(629) 555-0129",
@@ -64,7 +63,7 @@ const Data = [
         action: <BsIcons.BsThreeDotsVertical />
     },
     {
-        select: <BiIcons.BiCheckbox />,
+        select: <input type="checkbox" />,
         cusName: "Denise Mann",
         companyName: "MacDanald's",
         phoneNo: "(205) 555-0100",

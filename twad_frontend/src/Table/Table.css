@@ -1,11 +1,35 @@
-.table .customer-button {
-    display: flex;
-    justify-content: flex-end;
+body {
+    background-color: #E6E6E6;
 }
- 
- .table .customer-button button {
-    display: inline-block;
-    margin-bottom: 6rem;
+
+.Table button {
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.Table .title {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 200px;
+    height: 30px;
+    left: 130px;
+    top: 50px;
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.Table .customer-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 1115px;/*1200px for full width*/
+    top: 50px;
     padding: 10px 15px;
     border-radius: 8px;
     background-color: #4DA8DB;
@@ -14,7 +38,22 @@
     color: #E6E6E6;
     font-weight: 700;
     cursor: pointer;
- }
+}
+
+.Table .search-input {
+    box-sizing: border-box;
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    left: 150px;
+    top: 120px;
+    background: #FFFFFF;
+    color: #CCCCCC;
+    font-family: 'Roboto';
+    padding: 10px 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+}
 
 table {
     width: 80vw;
@@ -22,7 +61,7 @@ table {
     font-family: 'Roboto';
     border: 2px solid grey;
     border-collapse: collapse;
-    padding-top: 30px;
+    margin-top: 4rem;
 }
 
 table td, table th {

@@ -1,27 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Data from "../Table/Data";
-import * as BiIcons from 'react-icons/bi';
-import * as BsIcons from 'react-icons/bs';
 import "../Table/Table.css";
+import * as BsIcons from 'react-icons/bs';
+import * as BiIcons from 'react-icons/bi';
+
 
 function HomeOne({ hover = true }) {
     const columns = [
-        {field: "select", header: <BiIcons.BiCheckbox /> },
+        {field: "select", header: <input type="checkbox" /> },
         {field: "cusName", header: "Customer Name" },
         {field: "companyName", header: "Company" },
         {field: "phoneNo", header: "Phone Number" },
         {field: "emailAddress", header: "Email Address" },
         {field: "panNo", header: "PAN" },
         {field: "gstIn", header: "GSTIN" },
-        {field: "action", header: <BsIcons.BsThreeDotsVertical /> },
+        {field: "action"},
     ]
+
+    const[value, setValue] = useState('');
+    const[dataSource, setDataSource] = useState(Data);
+    const[tableFilter, setTableFilter] = useState([]);
+
+    const filterData = (e) => {
+        let userInput = e.target.value;
+        if(userInput !== "") {
+            setValue(userInput);
+            const filterTable = dataSource.filter(o=>Object.keys(o).some(k=> 
+                String(o[k]).toLowerCase().includes(userInput.toLowerCase())
+                ));
+                setTableFilter([...filterTable])
+        }else {
+            setValue(userInput);
+            setDataSource([...dataSource])
+        }
+    }
+
     return(
-        <div className="table">
-            <div className="title">
-                <h1>Table-Content</h1>
-            </div>
-            <div className="customer-button">
-            <button>Add Customer</button>
+        <div className="Table">
+            <h1 className="title">Table-Content</h1>
+            <button className="customer-button">Add Customer</button>
+            <input type="text" placeholder="Search" className="search-input" value={value} 
+            onChange={filterData} />
+            <div className="input-icons">
+            <i><BsIcons.BsSortUp/></i>
+            <input type="text" placeholder="Sort: Company ID"/>
+            <i><BiIcons.BiChevronDown/></i>
             </div>
             <table>
                 <thead>
@@ -35,17 +58,28 @@ function HomeOne({ hover = true }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {Data &&
-                        Data.map((row) => (
+                {value.length > 0 ? tableFilter.map((row) => {
+                    return(
                         <tr className={`${hover && "hover"}`}>
                             {columns.map((col) => (
                                 <td>{row[col.field]}</td>
                             ))}
                         </tr>
-                        ))}
+                    )
+                        })
+                    :
+                   dataSource.map((row) => {
+                        return(
+                            <tr className={`${hover && "hover"}`}>
+                                {columns.map((col) => (
+                                    <td>{row[col.field]}</td>
+                                ))}
+                            </tr>
+                        )
+                            })
+                        }
                 </tbody>
             </table>
-            {Data ? null : <h5>No data</h5> }
         </div>
     )
 }
