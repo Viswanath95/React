@@ -3,8 +3,15 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
+import * as ImIcons from 'react-icons/im';
 
 export const SidebarData = [
+    {
+        title: 'User',
+        path: 'usertable',
+        icon: <ImIcons.ImUser />,
+        className: 'nav-text'
+    },
     {
         title: 'Home',
         path: 'home',

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
+import UserTable from "./UserManagement/UserTable";
 import Home from "./Pages/Home";
 import HomeOne from "./Pages/HomeOne";
 import HomeTwo from "./Pages/HomeTwo";
@@ -20,6 +21,7 @@ export const AppRoutes = () => {
     {
       path: "/dashboard", element: <Dashboard />,
       children: [
+        { path: "usertable", element: <UserTable /> },
         { path: "home", element: <Home />,
         children: [
           { path: "homeone", element: <HomeOne /> }, 

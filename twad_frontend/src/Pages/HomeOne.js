@@ -4,7 +4,6 @@ import "../Table/Table.css";
 import * as BsIcons from 'react-icons/bs';
 import * as BiIcons from 'react-icons/bi';
 
-
 function HomeOne({ hover = true }) {
     const columns = [
         {field: "select", header: <input type="checkbox" /> },
