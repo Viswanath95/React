@@ -42,7 +42,7 @@
     width: 150px;
     height: 20px;
     left: 160px;
-    top: 110px;
+    top: 105px;
     background: #FFFFFF;
     color: #CCCCCC;
     font-family: 'Roboto';
@@ -58,7 +58,7 @@
     align-items: center;
     position: absolute;
     left: 1000px;/*1200px for full width*/
-    top: 100px;
+    top: 95px;
     padding: 10px 15px;
     border-radius: 8px;
     /*background-color: #4DA8DB;
@@ -99,5 +99,4 @@ table tr {
     border-top: 1px solid #ddd;
     border-collapse: collapse;
 }
-
 
