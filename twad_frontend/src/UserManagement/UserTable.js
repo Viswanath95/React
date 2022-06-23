@@ -6,7 +6,8 @@ import * as BiIcons from 'react-icons/bi';
 
 function UserTable({ hover = true }) {
     const [data, setData] = useState([]);
-   
+    const [searchTerm, setsearchTerm] = useState('');
+  
     useEffect(() => {
         getApiData();
     }, [data])
@@ -36,7 +37,11 @@ function UserTable({ hover = true }) {
         <div className="user">
             <h1 className="title">UserManagement</h1>
             <button className="add-user">Add User</button>
-            <input type="text" placeholder="Search" className="search-input" />
+            <input type="text" placeholder="Search" className="search-input" value={searchTerm} 
+            onChange={(e) => {
+                setsearchTerm(e.target.value);
+            }}
+            />
             <div className="input-icons">
                 <i><BsIcons.BsSortUp /></i>
                 <input type="text" placeholder="Sort: Company ID" />
@@ -55,7 +60,19 @@ function UserTable({ hover = true }) {
                 </thead>
                 <tbody>
                     {data &&
-                        data.map((show, i) => (
+                        data.filter((val) => {
+                            if(searchTerm === '') {
+                                return val;
+                            }else if(
+                                val.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                val.middlename.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                val.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                val.email.toLowerCase().includes(searchTerm.toLowerCase())
+                            ){
+                                return val;
+                            }
+                        })
+                       .map((show, i) => (
                             <tr key={i} className={`${hover && "hover"}`}>
                                 <td>{show.departmentID}</td>
                                 <td>{show.firstname}</td>
