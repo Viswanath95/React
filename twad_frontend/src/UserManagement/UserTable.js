@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from "axios";
+import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';
 import { usePopper } from 'react-popper';
 import './UserTable.css';
@@ -8,26 +9,32 @@ import * as BiIcons from 'react-icons/bi';
 import * as AiIcons from 'react-icons/ai';
 
 function UserTable({ hover = true }) {
-
     let navigate = useNavigate();
     const [data, setData] = useState([]);
     const [searchTerm, setsearchTerm] = useState('');
+    const [perPage, setperPage] = useState(7);
+    const [currentPage, setcurrentPage] = useState(0);
     const [popupMenu, setpopupMenu] = useState(false);
     let [referenceElement, setreferenceElement] = useState();
     let [popperElement, setpopperElement] = useState();
     let { styles, attributes } = usePopper(referenceElement, popperElement, { placement: "bottom-end"});
 
     useEffect(() => {
-        getApiData();
-    })
 
-    const getApiData = () => {
+        nextPage(0, perPage)
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+
+    }, [data.firstname])
+
+    const nextPage = (pageNumber) => {
         axios
-            .get("http://192.168.5.21:8080/api/v1/getALLUsers/0/7")//here '0' is a page number and '7' is a data count
+            .get(`http://192.168.5.21:8080/api/v1/getALLUsers/${pageNumber}/${perPage}`)
             .then((response) => {
                 //console.log(response.data);
-                setData(response.data);
-            })
+               setcurrentPage(pageNumber);
+               setperPage(perPage);
+               setData(response.data);
+            }, [])
             .catch((error) => {
                 console.log('Failed to retrieve data:' + error)
             })
@@ -58,8 +65,7 @@ function UserTable({ hover = true }) {
     }
 
     return (
-    
-      <div className="user">
+        <div className="user">
             <h1 className="title">UserManagement</h1>
             <button className="add-user">Add User</button>
             <input type="text" placeholder="Search" className="search-input" value={searchTerm} 
@@ -121,6 +127,7 @@ function UserTable({ hover = true }) {
                         ))}
                 </tbody>
             </table>
+            <Pagination currentPage={currentPage} nextPage={nextPage} />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 .nav-menu {
-    background-color: white;
+    background-color:  #FBF7F4;/*white*/
     border-right: 2px solid #d2dde4;
-    width: 140px;
+    width: 160px;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -23,7 +23,7 @@
 
 .sidebar-link {
     display: flex;
-    color: black;
+    color:  #53A57D;/*black*/
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
@@ -34,7 +34,7 @@
 }
 
 .sidebar-link:hover {
-    background-color: #4DA8DB;
+    background-color: #FFFFD2; /*#4DA8DB*/
     cursor: pointer;
 }
 
