@@ -16,7 +16,7 @@ import '../App.css';
 
 function Navbar() {
     let navigate = useNavigate();
-    const[sidebar, setSidebar] = useState(false);
+    const[sidebar, setSidebar] = useState(true);
     const[dropdown, setDropdown] = useState(false);
 
     const showSidebar = () => {
@@ -39,7 +39,7 @@ function Navbar() {
                 <button><FaIcons.FaBars onClick={showSidebar} /></button>
             </Link>
             <nav className={sidebar ? 'nav-menu active': 'nav-menu'}>
-            <IconContext.Provider value={{color: '#53A57D'}}>
+            <IconContext.Provider value={{color: 'white'}}>
             <ul className='nav-menu-items'>
             {SidebarData.map((item, index) => {
                     return(
