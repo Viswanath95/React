@@ -5,7 +5,6 @@ import * as AiIcons from 'react-icons/ai';
 import * as BsIcons from 'react-icons/bs';
 import * as TbIcons from 'react-icons/tb';
 import * as CgIcons from 'react-icons/cg';
-import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import { SidebarData } from '../Sidebar/SidebarData';
 import SubMenu from '../Sidebar/SubMenu';
@@ -13,6 +12,7 @@ import img from '../Images/logo.png';
 import './Navbar.css';
 import '../Sidebar/Sidebar.css';
 import '../App.css';
+//import { IconContext } from 'react-icons/lib';
 
 function Navbar() {
     let navigate = useNavigate();
@@ -39,7 +39,6 @@ function Navbar() {
                 <button><FaIcons.FaBars onClick={showSidebar} /></button>
             </Link>
             <nav className={sidebar ? 'nav-menu active': 'nav-menu'}>
-            <IconContext.Provider value={{color: 'white'}}>
             <ul className='nav-menu-items'>
             {SidebarData.map((item, index) => {
                     return(
@@ -49,8 +48,7 @@ function Navbar() {
                     )
                 })}
             </ul>
-            </IconContext.Provider>
-        </nav>
+            </nav>
             <div className="icon">
                 <img src={img} alt="Raavan Technologies"/>
             </div>

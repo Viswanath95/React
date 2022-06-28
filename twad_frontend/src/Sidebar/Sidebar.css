@@ -1,5 +1,5 @@
 .nav-menu {
-    background-color: #0d0c22;/*white #9e9ea7*/
+    background-color: white;/* #9e9ea7*/
     border-right: 2px solid #d2dde4;
     width: 160px;
     height: 100vh;
@@ -23,7 +23,7 @@
 
 .sidebar-link {
     display: flex;
-    color:  white;/*black*/
+    color:  black;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;

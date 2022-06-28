@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import Pagination from './Pagination';
-import PopUp from './PopUp';
-import './PopUp.css';
 //import { useNavigate } from 'react-router-dom';
-//import { usePopper } from 'react-popper';
+import Pagination from './Pagination';
 import './UserTable.css';
 import * as BsIcons from 'react-icons/bs';
 import * as BiIcons from 'react-icons/bi';
@@ -16,11 +13,8 @@ function UserTable({ hover = true, striped = true }) {
     const [searchTerm, setsearchTerm] = useState('');
     const [perPage, setperPage] = useState(7);
     const [currentPage, setcurrentPage] = useState(0);
-    const [isOpen, setisOpen] = useState(false);
-    /*let [referenceElement, setreferenceElement] = useState();
-    let [popperElement, setpopperElement] = useState();
-    let { styles, attributes } = usePopper(referenceElement, popperElement, { placement: "bottom-end"});*/
-
+    const [totalPages, settotalPages] = useState(2);
+    
     useEffect(() => {
 
         nextPage(0, perPage)
@@ -30,33 +24,40 @@ function UserTable({ hover = true, striped = true }) {
 
     const nextPage = (pageNumber) => {
         axios
-            .get(`http://192.168.5.21:8080/api/v1/getALLUsers/${pageNumber}/${perPage}`)
+            .get(`http://192.168.5.25:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}`)
             .then((response) => {
-                //console.log(response.data);
+              
+               console.log(response.data);
                setcurrentPage(pageNumber);
                setperPage(perPage);
+               console.log(totalPages);
+               settotalPages(totalPages);
                setData(response.data);
             }, [])
             .catch((error) => {
-                console.log('Failed to retrieve data:' + error)
+                console.log('Failed to retrieve data:' + JSON.parse(JSON.stringify(error)))
             })
     }
 
+    /*const totalpageNumber = () => {
+        data.filter((val) => {
+            if(val.totalPages !== '') {
+                console.log(val.totalPages);
+                settotalPages(val.totalPages);
+            }
+        })
+    }*/
+
     const tableHeader = [
-        { header: "departmentID" },
-        { header: "firstname" },
-        { header: "middlename" },
-        { header: "lastname" },
+        { header: "id" },
+        { header: "username" },
+        { header: "email" },
         { header: "mobile1" },
         { header: "mobile2" },
-        { header: "email" },
+        { header: "roles" },
+        { header: "departments" },
         { header: "action"},
     ]
-
-    const popupMenu = () => {
-        //  console.log("Pop-up-menu is working");
-        setisOpen(!isOpen)
-    }
 
     /*const edit = () => {
         navigate("/");
@@ -92,45 +93,40 @@ function UserTable({ hover = true, striped = true }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data &&
-                        data.filter((val) => {
-                            if(searchTerm === '') {
-                                return val;
-                            }else if(
-                                val.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                val.middlename.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                val.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                val.email.toLowerCase().includes(searchTerm.toLowerCase())
-                            ){
-                                return val;
-                            }
-                        })
-                       .map((show, i) => (
-                            <tr key={i} className={`${hover && "hover"} ${striped && "striped"}`}>
-                                <td>{show.departmentID}</td>
-                                <td>{show.firstname}</td>
-                                <td>{show.middlename}</td>
-                                <td>{show.lastname}</td>
-                                <td>{show.mobile1}</td>
-                                <td>{show.mobile2}</td>
-                                <td>{show.email}</td>
+                  {data &&
+                    data.map((item, index) => {
+                        return(
+                            <tr key={index} className={`${hover && "hover"} ${striped && "striped"}`}>
+                                <td>{item.id}</td>
+                                <td>{item.username}</td>
+                                <td>{item.email}</td>
+                                <td>{item.mobile1}</td>
+                                <td>{item.mobile2}</td>
                                 <td>
-                                    <>
-                                    <button onClick={popupMenu}>
-                                        <BsIcons.BsThreeDotsVertical />
-                                    </button>
-                                    {
-                                    isOpen && <PopUp 
-                                    header= {
-                                        <>
-                                       <AiIcons.AiFillEdit /><span>Edit</span>
-                                       <AiIcons.AiFillDelete /><span>Delete</span>
-                                    </>}
-                                    />}
-                                </>
+                                {
+                                    item.roles.map((roleData, index) => {
+                                        return(
+                                            <tr>
+                                            <td key={index}>{JSON.parse(roleData)}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                                 </td>
+                                <td>
+                                {
+                                    item.departments.map((departmentData, index) => {
+                                        return(
+                                            <td key={index}>{JSON.parse(departmentData)}</td>
+                                        )
+                                    })
+                                }
+                                </td>
+                                <td><BsIcons.BsThreeDotsVertical /></td>
                             </tr>
-                        ))}
+                        )
+                    })
+                  }
                 </tbody>
             </table>
             <Pagination currentPage={currentPage} nextPage={nextPage} />
