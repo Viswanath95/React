@@ -13,7 +13,7 @@ function UserTable({ hover = true, striped = true }) {
     const [searchTerm, setsearchTerm] = useState('');
     const [perPage, setperPage] = useState(7);
     const [currentPage, setcurrentPage] = useState(0);
-    const [totalPages, settotalPages] = useState(2);
+    const [totalPages, settotalPages] = useState({ totalPages: ''});
     
     useEffect(() => {
 
@@ -26,7 +26,6 @@ function UserTable({ hover = true, striped = true }) {
         axios
             .get(`http://192.168.5.25:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}`)
             .then((response) => {
-              
                console.log(response.data);
                setcurrentPage(pageNumber);
                setperPage(perPage);
@@ -129,7 +128,7 @@ function UserTable({ hover = true, striped = true }) {
                   }
                 </tbody>
             </table>
-            <Pagination currentPage={currentPage} nextPage={nextPage} />
+            <Pagination currentPage={currentPage} nextPage={nextPage} totalPages={totalPages} />
         </div>
     )
 }

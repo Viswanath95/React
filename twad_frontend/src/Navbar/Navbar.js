@@ -28,6 +28,8 @@ function Navbar() {
     }
 
     const logout = () => {
+        sessionStorage.removeItem('Token');
+        sessionStorage.clear();
         navigate("/");
     }
 
