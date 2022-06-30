@@ -3,7 +3,7 @@ import React from 'react';
 function Pagination( props ) {
     const pageLinks = [];
 
-    for(let i=1; i <= props.totalPages; i++) {
+    for(let i=1; i <= props.endPage; i++) {
         //let active = props.currentPage === i ? 'active' : '';
         pageLinks.push(<li key={i} onClick={() => props.nextPage(i)}><a href="#">{i}</a></li>)
     }
@@ -11,7 +11,7 @@ function Pagination( props ) {
         <div>
             {props.currentPage > 1 ? <li onClick={() => props.nextPage(props.currentPage - 1)}><a href="#">Prev</a></li> : '' }
             {pageLinks}
-            {props.currentPage <= props.totalPages? <li onClick={() => props.nextPage(props.currentPage + 1)}><a href="#">Next</a></li> : '' }
+            {props.currentPage <= props.endPage ? <li onClick={() => props.nextPage(props.currentPage + 1)}><a href="#">Next</a></li> : '' }
         </div>
     )
 }

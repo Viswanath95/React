@@ -3,6 +3,7 @@ import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import UserTable from "./UserManagement/UserTable";
+import UserForm from "./UserManagement/UserForm";
 import Home from "./Pages/Home";
 import HomeOne from "./Pages/HomeOne";
 import HomeTwo from "./Pages/HomeTwo";
@@ -14,22 +15,26 @@ import Reports from "./Pages/Reports";
 import Support from "./Pages/Support";
 import Team from "./Pages/Team";
 import ErrorPage from "./ErrorPage/ErrorPage";
-import './App.css';
+import "./App.css";
 
 export const AppRoutes = () => {
   let routes = useRoutes([
     {
-      path: "/dashboard", element: <Dashboard />,
+      path: "/dashboard",
+      element: <Dashboard />,
       children: [
         { path: "usertable", element: <UserTable /> },
-        { path: "home", element: <Home />,
-        children: [
-          { path: "homeone", element: <HomeOne /> }, 
-          { path: "hometwo", element: <HomeTwo /> },
-          { path: "homethree", element: <HomeThree /> },
-          { path: "homefour", element: <HomeFour /> },
-        ],
-      },
+        { path: "userform", element: <UserForm /> },
+        {
+          path: "home",
+          element: <Home />,
+          children: [
+            { path: "homeone", element: <HomeOne /> },
+            { path: "hometwo", element: <HomeTwo /> },
+            { path: "homethree", element: <HomeThree /> },
+            { path: "homefour", element: <HomeFour /> },
+          ],
+        },
         { path: "reports", element: <Reports /> },
         { path: "products", element: <Products /> },
         { path: "team", element: <Team /> },
@@ -37,14 +42,14 @@ export const AppRoutes = () => {
         { path: "support", element: <Support /> },
       ],
     },
-    { path: "/", element: <Login />},
-    { path: "*", element: <ErrorPage />},
+    { path: "/", element: <Login /> },
+    { path: "*", element: <ErrorPage /> },
   ]);
   return routes;
 };
 
 const App = () => {
-  return(
+  return (
     <Router>
       <AppRoutes />
     </Router>
