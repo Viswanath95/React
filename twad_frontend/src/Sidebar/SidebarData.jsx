@@ -4,8 +4,15 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 import * as RiIcons from 'react-icons/ri';
 import * as ImIcons from 'react-icons/im';
+import * as MdIcons from 'react-icons/md';
 
 export const SidebarData = [
+    {
+        title: 'Scheme',
+        path: 'schemepage',
+        icon: <MdIcons.MdSchema />,
+        className: 'nav-text'
+    },
     {
         title: 'User',
         path: 'usertable',
