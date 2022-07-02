@@ -3,7 +3,7 @@ import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import SchemeCreation from "./SchemeInitiation/SchemeCreation";
-//import UserTable from "./UserManagement/UserTable";
+import UserTable from "./UserManagement/UserTable";
 //import UserForm from "./UserManagement/UserForm";
 import Home from "./Pages/Home";
 import HomeOne from "./Pages/HomeOne";
@@ -25,6 +25,8 @@ export const AppRoutes = () => {
       element: <Dashboard />,
       children: [
         { path: "schemepage", element: <SchemeCreation />},
+        { path: "usertable", element: <UserTable />},
+
         {
           path: "home",
           element: <Home />,

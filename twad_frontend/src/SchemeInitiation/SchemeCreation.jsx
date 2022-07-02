@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import Select from 'react-select';
-import './SchemeCreation.css';
-import { schemeType,categoryofScheme,subcategoryofScheme,region,circle,divisions } from './CreateData';
+import Select from "react-select";
+import "./SchemeCreation.css";
+import {
+  schemeType,
+  categoryofScheme,
+  subcategoryofScheme,
+  region,
+  circle,
+  divisions,
+} from "./CreateData";
 
 function SchemeCreation() {
-
-    /*const [schemeData, setschemeData] = useState({schemename: ''})
+  /*const [schemeData, setschemeData] = useState({schemename: ''})
     const changeHandler = (e) => {
         setschemeData({ ...schemeData, [e.target.name]: e.target.value });
     };*/
+
+  const [divisionState, setdivisionState] = useState({ selectedOption: null });
+
+  const handledivisionChange = (selectedOption) => {
+    setdivisionState({ selectedOption });
+  };
 
   let token = sessionStorage.getItem("Token");
 
@@ -49,8 +61,8 @@ function SchemeCreation() {
     Authorization: `${token}`,
   };
 
-  const schemeOutput = () => {
-    //e.preventDefault();
+  const schemeOutput = (e) => {
+    e.preventDefault();
     axios
       .post("http://192.168.5.21:8080/api/v1/CreateScheme", postData, {
         headers: header,
@@ -63,51 +75,51 @@ function SchemeCreation() {
       });
   };
 
-    return (
+  return (
     <body>
-    <div className="container">
+      <div className="container">
         <header>Scheme Creation</header>
-            <form>
-            <div className="first-form">
-                <div className="fields">
-                    <div className="input-field">
-                        <label>Scheme Name:</label>
-                        <input type="text" placeholder="Enter scheme name" />
-                    </div>
-                    <div className="input-field">
-                        <label>Scheme Type:</label>
-                        <Select options={schemeType} />
-                    </div>
-                    <div className="input-field">
-                        <label>Category of Scheme:</label>
-                        <Select options={categoryofScheme} />
-                    </div>
-                    <div className="input-field">
-                        <label>Sub-Category of Scheme:</label>
-                        <Select options={subcategoryofScheme} />
-                    </div>
-                    <div className="input-field">
-                        <label>Region:</label>
-                        <Select options={region} />
-                    </div>
-                    <div className="input-field">
-                        <label>Circle:</label>
-                        <Select options={circle} />
-                    </div>
-                    <div className="input-field">
-                        <label>Division(s):</label>
-                        <Select options={divisions} />
-                    </div>
-
-                </div>
-
+         <div className="first-form">
+            <div className="fields">
+              <div className="input-field">
+                <label>Scheme Name:</label>
+                <input type="text" placeholder="Enter scheme name" />
+              </div>
+              <div className="input-field">
+                <label>Scheme Type:</label>
+                <Select options={schemeType} />
+              </div>
+              <div className="input-field">
+                <label>Category of Scheme:</label>
+                <Select options={categoryofScheme} />
+              </div>
+              <div className="input-field">
+                <label>Sub-Category of Scheme:</label>
+                <Select options={subcategoryofScheme} />
+              </div>
+              <div className="input-field">
+                <label>Region:</label>
+                <Select options={region} />
+              </div>
+              <div className="input-field">
+                <label>Circle:</label>
+                <Select options={circle} />
+              </div>
+              <div className="input-field">
+                <label>Division(s):</label>
+                <Select
+                  isMulti={true}
+                  value={divisionState.selectedOption}
+                  onChange={handledivisionChange}
+                  options={divisions}
+                />
+              </div>
+              <button onClick={schemeOutput}>Submit</button>
             </div>
-
-       
-            </form>     
-    </div>
+          </div>
+        </div>
     </body>
-    );
+  );
 }
 
 export default SchemeCreation;
