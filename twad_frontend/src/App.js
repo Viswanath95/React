@@ -26,7 +26,6 @@ export const AppRoutes = () => {
       children: [
         { path: "schemepage", element: <SchemeCreation />},
         { path: "usertable", element: <UserTable />},
-
         {
           path: "home",
           element: <Home />,
