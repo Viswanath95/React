@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -13,28 +13,36 @@ function UserTable({ hover = true, striped = true }) {
   const [data, setData] = useState([]);
   const [searchTerm, setsearchTerm] = useState("");
   const [perPage, setperPage] = useState(7);
-  const [currentPage, setcurrentPage] = useState(0);
+  const [currentPage, setcurrentPage] = useState(1);
   const [endPage, setendPage] = useState(0);
+  
 
   let token = sessionStorage.getItem("Token");
 
-  useEffect(() => {
-    nextPage(0, perPage);
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.firstname]);
+  let config = {
+    Authorization: `${token}`,
+  };
 
-  const nextPage = (pageNumber) => {
+  useEffect(() => {
+
+    nextPage();
+    
+  }, []);
+
+  const nextPage = (pageNumber, searchTerm) => {
     axios
       .get(
-        `http://192.168.5.25:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}`,
-        { headers: { Authorization: `${token}` } }
+        `http://192.168.5.37:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}`,
+        { params: { searchKeyword: searchTerm }, headers: config }
       )
-      .then((response) => {
-        setendPage(response.data.intValue);
-        setcurrentPage(pageNumber);
-        setperPage(perPage);
-        setData(response.data.commonList);
-      }, [])
+      .then(
+        (response) => {
+          console.log(response.data);
+          setendPage(response.data.intValue);
+          setcurrentPage(pageNumber);
+          setperPage(perPage);
+          setData(response.data.commonList);
+        })
       .catch((error) => {
         console.log(
           "Failed to retrieve data:" + JSON.parse(JSON.stringify(error))
@@ -42,23 +50,10 @@ function UserTable({ hover = true, striped = true }) {
       });
   };
 
-  const searchInput = (pageNumber, searchTerm) => {
-    axios
-      .get(
-        `http://192.168.5.25:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}?searchKeyword=${searchTerm}`,
-        { headers: { Authorization: `${token}` } }
-      )
-      .then(
-        (response) => {
-          setcurrentPage(pageNumber);
-          setperPage(perPage);
-        },
-        [searchTerm]
-      )
-      .catch((error) => {
-        console.log("Failed to retrieve data:" + error);
-      });
-  };
+  const searchInput = useMemo(
+    () => nextPage(1, searchTerm),
+    [searchTerm]
+  );
 
   const newUser = () => {
     navigate("/dashboard/userform");
@@ -89,7 +84,7 @@ function UserTable({ hover = true, striped = true }) {
           setsearchTerm(e.target.value);
         }}
       />
-      <button onClick={searchInput(0, searchTerm)}>Search</button>
+      {searchInput}
       <div className="input-icons">
         <i>
           <BsIcons.BsSortUp />
