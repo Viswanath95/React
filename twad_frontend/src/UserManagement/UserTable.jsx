@@ -13,9 +13,9 @@ function UserTable({ hover = true, striped = true }) {
   const [data, setData] = useState([]);
   const [searchTerm, setsearchTerm] = useState("");
   const [perPage, setperPage] = useState(7);
-  const [currentPage, setcurrentPage] = useState(1);
+  const [currentPage, setcurrentPage] = useState(0);
   const [endPage, setendPage] = useState(0);
-  
+  //const [rerender, setRerender] = useState("");
 
   let token = sessionStorage.getItem("Token");
 
@@ -25,11 +25,11 @@ function UserTable({ hover = true, striped = true }) {
 
   useEffect(() => {
 
-    nextPage();
-    
+    nextPage(1, perPage);
+
   }, []);
 
-  const nextPage = (pageNumber, searchTerm) => {
+  const nextPage = (pageNumber, perPage, searchTerm) => {
     axios
       .get(
         `http://192.168.5.37:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}`,
@@ -51,16 +51,22 @@ function UserTable({ hover = true, striped = true }) {
   };
 
   const searchInput = useMemo(
-    () => nextPage(1, searchTerm),
+    () => nextPage(currentPage, perPage, searchTerm),
     [searchTerm]
   );
+
+  const reRender = e => {
+    setsearchTerm(e.target.value);
+  }
 
   const newUser = () => {
     navigate("/dashboard/userform");
   };
 
   const tableHeader = [
-    { header: "username" },
+    { header: "firstname" },
+    { header: "lastname"},
+    { header: "username"},
     { header: "email" },
     { header: "mobile1" },
     { header: "mobile2" },
@@ -80,9 +86,7 @@ function UserTable({ hover = true, striped = true }) {
         placeholder="Search"
         className="search-input"
         value={searchTerm}
-        onChange={(e) => {
-          setsearchTerm(e.target.value);
-        }}
+        onChange={reRender}
       />
       {searchInput}
       <div className="input-icons">
@@ -108,6 +112,8 @@ function UserTable({ hover = true, striped = true }) {
                   key={index}
                   className={`${hover && "hover"} ${striped && "striped"}`}
                 >
+                  <td>{item.firstname}</td>
+                  <td>{item.lastname}</td>
                   <td>{item.username}</td>
                   <td>{item.email}</td>
                   <td>{item.mobile1}</td>
