@@ -12,11 +12,10 @@ function UserTable({ hover = true, striped = true }) {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
   const [searchTerm, setsearchTerm] = useState("");
-  const [perPage, setperPage] = useState(7);
-  const [currentPage, setcurrentPage] = useState(0);
+  const [perPage, setperPage] = useState(10);
+  const [currentPage, setcurrentPage] = useState(1);
   const [endPage, setendPage] = useState(0);
-  //const [rerender, setRerender] = useState("");
-
+ 
   let token = sessionStorage.getItem("Token");
 
   let config = {
@@ -25,15 +24,15 @@ function UserTable({ hover = true, striped = true }) {
 
   useEffect(() => {
 
-    nextPage(1, perPage);
-
+    nextPage(currentPage, perPage, searchTerm);
+    
   }, []);
 
   const nextPage = (pageNumber, perPage, searchTerm) => {
     axios
       .get(
-        `http://192.168.5.37:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}`,
-        { params: { searchKeyword: searchTerm }, headers: config }
+        `http://192.168.5.37:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}?searchKeyword=${searchTerm}`,
+        { headers: config }
       )
       .then(
         (response) => {
@@ -142,6 +141,8 @@ function UserTable({ hover = true, striped = true }) {
       <Pagination
         currentPage={currentPage}
         nextPage={nextPage}
+        perPage={perPage}
+        searchTerm={searchTerm}
         endPage={endPage}
       />
     </div>

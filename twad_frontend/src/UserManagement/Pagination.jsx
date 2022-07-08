@@ -1,17 +1,18 @@
 import React from 'react';
 
-function Pagination( props ) {
+function Pagination({currentPage, nextPage, perPage, searchTerm, endPage}) {
     const pageLinks = [];
 
-    for(let i=1; i <= props.endPage; i++) {
+    for(let i=currentPage; i <= endPage; i++) {
         //let active = props.currentPage === i ? 'active' : '';
-        pageLinks.push(<li key={i} onClick={() => props.nextPage(i)}><a href="#">{i}</a></li>)
+        pageLinks.push(<li onClick={() => nextPage(i, perPage, searchTerm)}><a href="#">{i}</a></li>)
     }
+    
     return(
         <div>
-            {props.currentPage > 1 ? <li onClick={() => props.nextPage(props.currentPage - 1)}><a href="#">Prev</a></li> : '' }
+            {currentPage > 1 ? <li onClick={() => nextPage(currentPage - 1, perPage, searchTerm)}><a href="#">Prev</a></li> : '' }
             {pageLinks}
-            {props.currentPage <= props.endPage ? <li onClick={() => props.nextPage(props.currentPage + 1)}><a href="#">Next</a></li> : '' }
+            {currentPage <= endPage ? <li onClick={() => nextPage(currentPage + 1, perPage, searchTerm)}><a href="#">Next</a></li> : '' }
         </div>
     )
 }
