@@ -2,13 +2,13 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import "./UserTable.css";
+import  UserTableStyles from './UserTable.module.css';
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
 import * as AiIcons from "react-icons/ai";
 import * as GrIcons from "react-icons/gr";
 
-function UserTable({ hover = true, striped = true }) {
+function UserTable({ hover = true }) {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
   const [searchTerm, setsearchTerm] = useState("");
@@ -75,20 +75,20 @@ function UserTable({ hover = true, striped = true }) {
   ];
 
   return (
-    <div className="user">
-      <h1 className="title">UserManagement</h1>
-      <button className="add-user" onClick={newUser}>
+    <div className={UserTableStyles.user}>
+      <h1 className={UserTableStyles.title}>UserManagement</h1>
+      <button className={UserTableStyles.adduser} onClick={newUser}>
         Add User
       </button>
       <input
         type="text"
         placeholder="Search"
-        className="search-input"
+        className={UserTableStyles.searchinput}
         value={searchTerm}
         onChange={reRender}
       />
       {searchInput}
-      <div className="input-icons">
+      <div className={UserTableStyles.inputicons}>
         <i>
           <BsIcons.BsSortUp />
         </i>
@@ -97,7 +97,7 @@ function UserTable({ hover = true, striped = true }) {
           <BiIcons.BiChevronDown />
         </i>
       </div>
-      <table>
+      <table className={UserTableStyles.tablecontent}>
         <thead>
           <tr>
             {tableHeader && tableHeader.map((head) => <th>{head.header}</th>)}
@@ -109,7 +109,7 @@ function UserTable({ hover = true, striped = true }) {
               return (
                 <tr
                   key={index}
-                  className={`${hover && "hover"} ${striped && "striped"}`}
+                  className={`${hover && UserTableStyles.hover}`}
                 >
                   <td>{item.firstname}</td>
                   <td>{item.lastname}</td>
