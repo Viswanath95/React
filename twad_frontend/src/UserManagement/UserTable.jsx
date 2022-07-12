@@ -15,6 +15,7 @@ function UserTable({ hover = true }) {
   const [perPage, setperPage] = useState(10);
   const [currentPage, setcurrentPage] = useState(1);
   const [endPage, setendPage] = useState(0);
+  const [deleteId, setdeleteId] = useState(1);
  
   let token = sessionStorage.getItem("Token");
 
@@ -36,7 +37,7 @@ function UserTable({ hover = true }) {
       )
       .then(
         (response) => {
-          console.log(response.data);
+          console.log(response.data.commonList);
           setendPage(response.data.intValue);
           setcurrentPage(pageNumber);
           setperPage(perPage);
@@ -48,6 +49,22 @@ function UserTable({ hover = true }) {
         );
       });
   };
+
+  const deleteRow = () => {
+    axios
+    .post(`http://192.168.5.37:8080/api/v1/deleteUserDetails?userId=${deleteId}`," ",
+    { headers: config }
+    )
+    .then(
+        (response) => {
+         console.log(response);
+        })
+      .catch((error) => {
+        console.log(
+          "Failed to retrieve id:" + JSON.parse(JSON.stringify(error))
+        );
+      });
+  }
 
   const searchInput = useMemo(
     () => nextPage(currentPage, perPage, searchTerm),
@@ -62,6 +79,7 @@ function UserTable({ hover = true }) {
     navigate("/dashboard/userform");
   };
 
+ 
   const tableHeader = [
     { header: "firstname" },
     { header: "lastname"},
@@ -129,9 +147,9 @@ function UserTable({ hover = true }) {
                   </td>
                   <td>
                     <GrIcons.GrEdit />
-                    <span>
-                      <AiIcons.AiTwotoneDelete />
-                    </span>
+                      <span>
+                      <button onClick={deleteRow}><AiIcons.AiTwotoneDelete /></button>
+                      </span>
                   </td>
                 </tr>
               );

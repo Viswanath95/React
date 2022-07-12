@@ -57,7 +57,7 @@ function SchemeCreation() {
     ],
   };
 
-  var header = {
+  let header = {
     Authorization: `${token}`,
   };
 
