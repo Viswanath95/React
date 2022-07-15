@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import  UserTableStyles from './UserTable.module.css';
+import PopUp from "./PopUp";
+import UserTableStyles from "./UserTable.module.css";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
 import * as AiIcons from "react-icons/ai";
@@ -15,6 +16,8 @@ function UserTable({ hover = true }) {
   const [perPage, setperPage] = useState(10);
   const [currentPage, setcurrentPage] = useState(1);
   const [endPage, setendPage] = useState(0);
+  const [btnPopup, setbtnPopup] = useState(false);
+  const [passId, setpassId] = useState(0);
 
   let token = sessionStorage.getItem("Token");
 
@@ -23,24 +26,21 @@ function UserTable({ hover = true }) {
   };
 
   useEffect(() => {
-
     nextPage(currentPage, perPage, searchTerm);
-    
   }, []);
 
   const nextPage = (pageNumber, perPage, searchTerm) => {
     axios
       .get(
-        `http://192.168.5.37:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}?searchKeyword=${searchTerm}`,
+        `http://localhost:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}?searchKeyword=${searchTerm}`,
         { headers: config }
       )
-      .then(
-        (response) => {
-          setendPage(response.data.intValue);
-          setcurrentPage(pageNumber);
-          setperPage(perPage);
-          setData(response.data.commonList);
-        })
+      .then((response) => {
+        setendPage(response.data.intValue);
+        setcurrentPage(pageNumber);
+        setperPage(perPage);
+        setData(response.data.commonList);
+      })
       .catch((error) => {
         console.log(
           "Failed to retrieve data:" + JSON.parse(JSON.stringify(error))
@@ -49,41 +49,46 @@ function UserTable({ hover = true }) {
   };
 
   const deleteRow = (index, e) => {
-  
-  window.location.reload(false);
-
-  axios
-    .post(`http://192.168.5.37:8080/api/v1/deleteUserDetails?userId=${index}`," ",
-    { headers: config }
-    )
-    .then(
-        (response) => {
-         console.log(response.data); 
-        })
+    window.location.reload(false);
+    
+    axios
+      .post(
+        `http://localhost:8080/api/v1/deleteUserDetails?userId=${index}`,
+        " ",
+        { headers: config }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
       .catch((error) => {
         console.log(
           "Failed to retrieve id:" + JSON.parse(JSON.stringify(error))
         );
       });
-  }
+  };
 
   const searchInput = useMemo(
     () => nextPage(currentPage, perPage, searchTerm),
     [searchTerm]
   );
 
-  const reRender = e => {
+  const reRender = (e) => {
     setsearchTerm(e.target.value);
-  }
+  };
 
   const newUser = () => {
     navigate("/dashboard/userform");
   };
 
+  const confirmDelete=(id, e) => {
+    setbtnPopup(true);
+    setpassId(id);
+  }
+
   const tableHeader = [
     { header: "firstname" },
-    { header: "lastname"},
-    { header: "username"},
+    { header: "lastname" },
+    { header: "username" },
     { header: "email" },
     { header: "mobile1" },
     { header: "mobile2" },
@@ -125,10 +130,7 @@ function UserTable({ hover = true }) {
           {data &&
             data.map((item, index) => {
               return (
-                <tr
-                  key={index}
-                  className={`${hover && UserTableStyles.hover}`}
-                >
+                <tr key={index} className={`${hover && UserTableStyles.hover}`}>
                   <td>{item.firstname}</td>
                   <td>{item.lastname}</td>
                   <td>{item.username}</td>
@@ -147,15 +149,23 @@ function UserTable({ hover = true }) {
                   </td>
                   <td>
                     <GrIcons.GrEdit />
-                      <span>
-                      <button onClick={(e) => deleteRow(item.id, e)}><AiIcons.AiTwotoneDelete /></button>
-                      </span>
+                    <span>
+                      <button onClick={(e)=>confirmDelete(item.id, e)}>
+                        <AiIcons.AiTwotoneDelete />
+                      </button>
+                    </span>
                   </td>
                 </tr>
               );
             })}
         </tbody>
       </table>
+      <PopUp 
+        trigger={btnPopup}
+        deleteRow={deleteRow}
+        passId={passId}
+        setTrigger={setbtnPopup}>
+      </PopUp>
       <Pagination
         currentPage={currentPage}
         nextPage={nextPage}

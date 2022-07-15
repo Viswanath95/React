@@ -1,6 +1,8 @@
 import React from 'react';
 
-function Pagination({currentPage, nextPage, perPage, searchTerm, endPage}) {
+function Pagination( props ) {
+
+    const {currentPage, nextPage, perPage, searchTerm, endPage} = props;
     const pageLinks = [];
 
     for(let i=currentPage; i <= endPage; i++) {

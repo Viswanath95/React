@@ -64,7 +64,7 @@ function SchemeCreation() {
   const schemeOutput = (e) => {
     e.preventDefault();
     axios
-      .post("http://192.168.5.21:8080/api/v1/CreateScheme", postData, {
+      .post("http://localhost:8080/api/v1/CreateScheme", postData, {
         headers: header,
       })
       .then((res) => {

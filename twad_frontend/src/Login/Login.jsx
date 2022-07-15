@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://192.168.5.37:8080/api/auth/signin",
+      url: "http://localhost:8080/api/auth/signin",
       data: {
         username: data.username,
         password: data.password,
