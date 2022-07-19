@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://localhost:8080/api/auth/signin",
+      url: `${process.env.REACT_APP_LOGIN_URL}`,
       data: {
         username: data.username,
         password: data.password,

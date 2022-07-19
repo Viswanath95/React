@@ -32,7 +32,7 @@ function UserTable({ hover = true }) {
   const nextPage = (pageNumber, perPage, searchTerm) => {
     axios
       .get(
-        `http://localhost:8080/api/v1/getAllUserDetails/${pageNumber}/${perPage}?searchKeyword=${searchTerm}`,
+        `${process.env.REACT_APP_DATATABLE_URL}/${pageNumber}/${perPage}?searchKeyword=${searchTerm}`,
         { headers: config }
       )
       .then((response) => {
@@ -50,10 +50,10 @@ function UserTable({ hover = true }) {
 
   const deleteRow = (index, e) => {
     window.location.reload(false);
-    
+
     axios
       .post(
-        `http://localhost:8080/api/v1/deleteUserDetails?userId=${index}`,
+        `${process.env.REACT_APP_DELETE_ROW}?userId=${index}`,
         " ",
         { headers: config }
       )
@@ -80,10 +80,10 @@ function UserTable({ hover = true }) {
     navigate("/dashboard/userform");
   };
 
-  const confirmDelete=(id, e) => {
+  const confirmDelete = (id, e) => {
     setbtnPopup(true);
     setpassId(id);
-  }
+  };
 
   const tableHeader = [
     { header: "firstname" },
@@ -127,10 +127,10 @@ function UserTable({ hover = true }) {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((item, index) => {
+        {data &&
+            data.map((item) => {
               return (
-                <tr key={index} className={`${hover && UserTableStyles.hover}`}>
+                <tr key={item.id} className={`${hover && UserTableStyles.hover}`}>
                   <td>{item.firstname}</td>
                   <td>{item.lastname}</td>
                   <td>{item.username}</td>
@@ -138,19 +138,27 @@ function UserTable({ hover = true }) {
                   <td>{item.mobile1}</td>
                   <td>{item.mobile2}</td>
                   <td>
-                    {item.roles.map((roleData, index) => {
-                      return <td key={index}>{roleData}</td>;
+                    {item.roles.map((roleData) => {
+                      return(
+                        <td>
+                        {roleData.replace(/^"|"$/g, "")}
+                        </td>
+                      );
                     })}
                   </td>
                   <td>
-                    {item.departments.map((departmentData, index) => {
-                      return <td key={index}>{departmentData}</td>;
+                    {item.departments.map((departmentData) => {
+                      return (
+                        <td>
+                          {departmentData.replace(/^"|"$/g, "")}
+                        </td>
+                      );
                     })}
                   </td>
                   <td>
                     <GrIcons.GrEdit />
                     <span>
-                      <button onClick={(e)=>confirmDelete(item.id, e)}>
+                      <button onClick={(e) => confirmDelete(item.id, e)}>
                         <AiIcons.AiTwotoneDelete />
                       </button>
                     </span>
@@ -160,12 +168,12 @@ function UserTable({ hover = true }) {
             })}
         </tbody>
       </table>
-      <PopUp 
+      <PopUp
         trigger={btnPopup}
         deleteRow={deleteRow}
         passId={passId}
-        setTrigger={setbtnPopup}>
-      </PopUp>
+        setTrigger={setbtnPopup}
+      ></PopUp>
       <Pagination
         currentPage={currentPage}
         nextPage={nextPage}
